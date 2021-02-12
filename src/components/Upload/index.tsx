@@ -4,28 +4,29 @@ import Dropzone from 'react-dropzone';
 import { DropContainer, UploadMessage } from './styles';
 
 interface UploadProps {
-  onUpload: Function;
+	onUpload: Function;
 }
 
 const Upload: React.FC<UploadProps> = ({ onUpload }: UploadProps) => {
-  function renderDragMessage(
-    isDragActive: boolean,
-    isDragRejest: boolean,
-  ): ReactNode {
-    if (!isDragActive) {
-      return (
-        <UploadMessage>Selecione ou arraste o arquivo aqui.</UploadMessage>
-      );
-    }
 
-    if (isDragRejest) {
-      return <UploadMessage type="error">Arquivo não suportado</UploadMessage>;
-    }
+	function renderDragMessage(
+		isDragActive: boolean,
+		isDragRejest: boolean,
+		): ReactNode {
+			if (!isDragActive) {
+				return (
+				<UploadMessage>Selecione ou arraste o arquivo aqui.</UploadMessage>
+				);
+			}
 
-    return <UploadMessage type="success">Solte o arquivo aqui</UploadMessage>;
-  }
+			if (isDragRejest) {
+				return <UploadMessage type="error">Arquivo não suportado</UploadMessage>;
+			}
 
-  return (
+			return <UploadMessage type="success">Solte o arquivo aqui</UploadMessage>;
+	}
+
+  	return (
     <>
       <Dropzone accept=".csv, application/vnd.ms-excel, text/csv," onDropAccepted={(files) => onUpload(files)}>
         {({ getRootProps, getInputProps, isDragActive, isDragReject }): any => (
